@@ -21,3 +21,10 @@ jobs:
           path: |
             test-results/
             playwright-report/
+
+  nginx-config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate pinned nginx configuration
+        run: docker run --rm -v "$PWD/deploy/showcase/nginx.conf:/etc/nginx/nginx.conf:ro" --entrypoint nginx docker.io/nginxinc/nginx-unprivileged:1.27-alpine@sha256:65e3e85dbaed8ba248841d9d58a899b6197106c23cb0ff1a132b7bfe0547e4c0 -t
