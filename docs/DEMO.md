@@ -9,3 +9,7 @@
 7. Finish with what is verified, what failed during development, and what remains pending.
 
 A successful demo produces a receipt with `scope: local-browser-demo`, `verified: true`, zero provider calls, and zero production actions. Content hashes are evidence of identity, not of semantic correctness or legal ownership.
+
+## Verified browser preview
+
+![Diatonic OS showcase by Chromatix Studios](showcase.png)

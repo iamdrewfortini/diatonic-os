@@ -80,6 +80,8 @@ npm test
 npm run check
 ```
 
+The public SDK CI checks 376 cases against source and again against its installed wheel; two separately marked private-reference checks are excluded without removing their assertions. RMM CI checks 13 cases. The showcase checks four core behaviors and two real-browser workflows.
+
 The showcase has no runtime npm dependencies. GitHub Actions and GitLab CI run the local verification tests and syntax checks. GitHub Pages deploys the static showcase from the main branch; it receives no production credentials. Component repositories independently test and build their packages using public dependency sources.
 
 ## Ownership
