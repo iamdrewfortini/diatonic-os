@@ -1,0 +1,31 @@
+name: Hosted showcase acceptance
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: Public node 1 showcase HTTPS URL
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SHOWCASE_URL: ${{ inputs.url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test --config playwright.hosted.config.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: node1-hosted-browser-evidence
+          path: |
+            test-results/
+            playwright-report/

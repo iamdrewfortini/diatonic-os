@@ -12,7 +12,7 @@ Diatonic OS explores a shared foundation for understanding system state, coordin
 
 **[Open the demo](https://iamdrewfortini.github.io/diatonic-os/)** · [Agent SDK](https://github.com/iamdrewfortini/diatonic-agent-sdk) · [RMM](https://github.com/iamdrewfortini/diatonic-rmm)
 
-The same static web service is installed on Hostinger cloud node 1. Its dedicated branded HTTPS route is awaiting activation; use the live demo above in the meantime. See the [node 1 deployment](deploy/showcase/README.md).
+The same showcase is publicly deployed on **Hostinger cloud node 1**: [open the temporary node 1 demo](https://ocean-performer-instrumentation-unsigned.trycloudflare.com/). This temporary URL changes if the connector restarts. The dedicated branded HTTPS route is awaiting activation; GitHub Pages remains the persistent demo address. See the [node 1 deployment](deploy/showcase/README.md).
 
 Or run locally, without accounts, keys, models, or a cluster:
 

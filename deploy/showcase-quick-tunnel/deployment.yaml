@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: diatonic-showcase-tunnel
+  labels:
+    app.kubernetes.io/name: diatonic-showcase-tunnel
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: diatonic-showcase-tunnel
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: diatonic-showcase-tunnel
+    spec:
+      priorityClassName: diatonic-demo-low
+      nodeSelector:
+        chromatixstudios.com/public-host: node1
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: cloudflared-quick-tunnel
+          image: docker.io/cloudflare/cloudflared:2026.5.2@sha256:12ff5c6992a9863db4da270746af7c244bcaee49353039af8104268a18d6c4f0
+          imagePullPolicy: IfNotPresent
+          args:
+            - tunnel
+            - --no-autoupdate
+            - --protocol
+            - http2
+            - --metrics
+            - 0.0.0.0:2000
+            - --url
+            - http://diatonic-showcase:8080
+          env:
+            - name: HOME
+              value: /tmp
+          resources:
+            requests:
+              cpu: 25m
+              memory: 64Mi
+              ephemeral-storage: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi
+              ephemeral-storage: 128Mi
+          readinessProbe:
+            httpGet: {path: /ready, port: metrics}
+            periodSeconds: 5
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 65532
+            runAsGroup: 65532
+            capabilities:
+              drop: [ALL]
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+          ports:
+            - name: metrics
+              containerPort: 2000
+              protocol: TCP
+      volumes:
+        - name: tmp
+          emptyDir:
+            sizeLimit: 8Mi
