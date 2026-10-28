@@ -23,7 +23,7 @@ showcase-package:
   stage: package
   tags: [diatonic-public]
   script:
-    - tar -czf diatonic-os-showcase.tar.gz showcase docs README.md LICENSE.md SECURITY.md
+    - tar -czf diatonic-os-showcase.tar.gz showcase deploy docs README.md LICENSE.md SECURITY.md
   artifacts:
     paths: [diatonic-os-showcase.tar.gz]
 

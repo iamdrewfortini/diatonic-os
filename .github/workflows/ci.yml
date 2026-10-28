@@ -14,6 +14,12 @@ jobs:
       - run: npm test && npm run check
       - run: npx playwright install --with-deps chromium
       - run: npm run test:browser
+      - name: Package verified showcase and deployment source
+        run: tar -czf diatonic-os-showcase.tar.gz showcase deploy docs README.md LICENSE.md SECURITY.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: showcase-release
+          path: diatonic-os-showcase.tar.gz
       - uses: actions/upload-artifact@v4
         if: always()
         with:
