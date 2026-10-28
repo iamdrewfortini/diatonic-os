@@ -1,0 +1,6 @@
+[submodule "repos/agent-sdk"]
+	path = repos/agent-sdk
+	url = https://github.com/iamdrewfortini/diatonic-agent-sdk.git
+[submodule "repos/rmm"]
+	path = repos/rmm
+	url = https://github.com/iamdrewfortini/diatonic-rmm.git

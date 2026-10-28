@@ -1,0 +1,28 @@
+stages: [verify, package]
+variables:
+  GIT_SUBMODULE_STRATEGY: none
+showcase-verify:
+  image: node:24-bookworm-slim
+  stage: verify
+  tags: [k8s]
+  script:
+    - npm test
+    - npm run check
+showcase-browser:
+  image: mcr.microsoft.com/playwright:v1.56.1-noble
+  stage: verify
+  tags: [k8s]
+  script:
+    - npm ci
+    - npm run test:browser
+  artifacts:
+    when: always
+    paths: [test-results/, playwright-report/]
+showcase-package:
+  image: alpine:3.22
+  stage: package
+  tags: [k8s]
+  script:
+    - tar -czf diatonic-os-showcase.tar.gz showcase docs README.md LICENSE.md SECURITY.md
+  artifacts:
+    paths: [diatonic-os-showcase.tar.gz]

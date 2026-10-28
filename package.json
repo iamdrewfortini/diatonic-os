@@ -1,0 +1,19 @@
+{
+  "name": "diatonic-os-showcase",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Diatonic OS by Chromatix Studios \u2014 10-day build showcase",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check showcase/app.mjs && node --check showcase/core.mjs",
+    "test:browser": "playwright test",
+    "demo": "node tools/serve.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1"
+  }
+}
