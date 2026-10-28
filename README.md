@@ -12,6 +12,8 @@ Diatonic OS explores a shared foundation for understanding system state, coordin
 
 **[Open the demo](https://iamdrewfortini.github.io/diatonic-os/)** · [Agent SDK](https://github.com/iamdrewfortini/diatonic-agent-sdk) · [RMM](https://github.com/iamdrewfortini/diatonic-rmm)
 
+The same static web service is installed on Hostinger cloud node 1. Its dedicated branded HTTPS route is awaiting activation; use the live demo above in the meantime. See the [node 1 deployment](deploy/showcase/README.md).
+
 Or run locally, without accounts, keys, models, or a cluster:
 
 ```sh
@@ -73,6 +75,16 @@ The build also measured an 85.425% reduction in a held-out local evidence payloa
 
 Read the [build journey](docs/BUILD-JOURNEY.md), [demo guide](docs/DEMO.md), [publication notes](docs/PUBLICATION.md), and [security policy](SECURITY.md).
 
+## Public repositories
+
+| Component | GitHub | Chromatix Studios GitLab |
+| --- | --- | --- |
+| Diatonic OS | [Source](https://github.com/iamdrewfortini/diatonic-os) | [Mirror](https://git.chromatixstudios.com/chromatix-studios/diatonic-os) |
+| Agent SDK | [Source](https://github.com/iamdrewfortini/diatonic-agent-sdk) | [Mirror](https://git.chromatixstudios.com/chromatix-studios/diatonic-agent-sdk) |
+| RMM | [Source](https://github.com/iamdrewfortini/diatonic-rmm) | [Mirror](https://git.chromatixstudios.com/chromatix-studios/diatonic-rmm) |
+
+GitHub Actions verifies each component. GitLab jobs target a dedicated, isolated public runner on node 1, with no private runner cache or production deployment identity. GitHub Pages publishes the showcase automatically from `main`.
+
 ## Development and CI
 
 ```sh
@@ -80,7 +92,7 @@ npm test
 npm run check
 ```
 
-The public SDK CI checks 376 cases against source and again against its installed wheel; two separately marked private-reference checks are excluded without removing their assertions. RMM CI checks 13 cases. The showcase checks four core behaviors and two real-browser workflows.
+The public SDK CI checks 376 cases against source and again against its installed wheel; two separately marked private-reference checks are excluded without removing their assertions. RMM CI checks 13 cases. The showcase checks four core behaviors, deployment asset parity, two real-browser workflows, and the pinned nginx configuration.
 
 The showcase has no runtime npm dependencies. GitHub Actions and GitLab CI run the local verification tests and syntax checks. GitHub Pages deploys the static showcase from the main branch; it receives no production credentials. Component repositories independently test and build their packages using public dependency sources.
 
